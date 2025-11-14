@@ -133,8 +133,8 @@ public class Kategori {
         
         // Menggunakan ILIKE untuk case-insensitive search di PostgreSQL
         String sql = "SELECT idkategori, nama, keterangan FROM kategori WHERE "
-                + "nama ILIKE '%" + keyword + "%' " 
-                + "OR keterangan ILIKE '%" + keyword + "%'";
+                + "nama LIKE '%" + keyword + "%' " 
+                + "OR keterangan LIKE '%" + keyword + "%'";
         
         ResultSet rs = DBHelper.selectQuery(sql);
 
