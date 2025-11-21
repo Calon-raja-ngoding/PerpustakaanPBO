@@ -11,26 +11,25 @@ public class DBHelper {
      * Membuka koneksi ke database PostgreSQL jika belum terbuka.
      */
     public static void bukaKoneksi() {
-    if (koneksi == null) {
-        try {
-            // register driver manual biar gak "no suitable driver"
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        if (koneksi == null) {
+            try {
+                // Konfigurasi koneksi Anda
+                String url = "jdbc:postgresql://localhost:5432/dbperpus"; 
+                String user = "postgres"; 
+                String password = "1234"; 
 
-            String url = "jdbc:mysql://localhost:3306/dbperpus";
-            String user = "root";
-            String password = "";
+                // Load driver PostgreSQL
+                DriverManager.registerDriver(new org.postgresql.Driver());
 
-            koneksi = DriverManager.getConnection(url, user, password);
-            System.out.println("Koneksi berhasil!");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Driver MySQL tidak ditemukan!");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("Error koneksi!");
-            e.printStackTrace();
+                // Buat koneksi
+                koneksi = DriverManager.getConnection(url, user, password);
+
+                System.out.println("Koneksi PostgreSQL berhasil!");
+            } catch (SQLException t) {
+                System.out.println("Error koneksi PostgreSQL: " + t.getMessage());
+            }
         }
     }
-}
 
     /**
      * Menutup koneksi database jika sedang terbuka.
